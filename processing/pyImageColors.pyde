@@ -136,6 +136,7 @@ def calculeWeight(row, colors):
     return w
 
 def transpose(matrix):
+    '''Transponemos la matriz "matrix".'''
     transMatrix = []
     for i in range(len(matrix[0])):
         transMatrix.append([])
