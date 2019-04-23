@@ -1,4 +1,6 @@
 import random
+import colorsys
+
 cellsize = 5 # Dimensions of each cell in the grid
 stch = False 
 
@@ -8,6 +10,8 @@ class OrderType:
     GreaterThanRed = 1
     Zigzagging = 2
     CustomOrder = 3
+    Itten = 4
+    Luminance = 5
 
 class Color:
     '''Clase que representa un color en una posición X,Y determinada al interior de una matriz.'''
@@ -73,6 +77,14 @@ def greaterThan(col1, col2 , colorsOrder, orderType):
             return colorsOrder[col1.col] > colorsOrder[col2.col]
         else:
             return False
+    elif orderType == OrderType.Itten:
+        hsv1 = colorsys.rgb_to_hsv(red(col1.col), green(col1.col), blue(col1.col))
+        hsv2 = colorsys.rgb_to_hsv(red(col2.col), green(col2.col), blue(col2.col))
+        return hsv1[0] > hsv2[0]
+    elif orderType == OrderType.Luminance:
+        y1 = 0.2126*red(col1.col) + 0.7152*green(col1.col) + 0.0722*blue(col1.col)
+        y2 = 0.2126*red(col2.col) + 0.7152*green(col2.col) + 0.0722*blue(col2.col)
+        return y1 > y2
     else:
         return False
 
@@ -123,7 +135,20 @@ def calculeWeight(row, colors):
         w = w + colors[col.col]
     return w
 
-def orderMatrix(matrix, colorsOrder, orderType = OrderType.GreaterThan):
+def transpose(matrix):
+    transMatrix = []
+    for i in range(len(matrix[0])):
+        transMatrix.append([])
+
+    for row in matrix:
+        i = 0
+        for col in row:
+            transMatrix[i].append(Color(col.y, col.x, col.col))
+            i = i + 1
+
+    return transMatrix
+
+def orderMatrix(matrix, colorsOrder, orderType = OrderType.GreaterThan, weight = True):
     '''Función encargada de ordenar la matriz.
        :param matrix: Matriz a ordenar.
        :param colorsOrder: Criterio de orden.
@@ -132,10 +157,25 @@ def orderMatrix(matrix, colorsOrder, orderType = OrderType.GreaterThan):
 
     for row in matrix:
         rowSorted = rowsBubble(row, colorsOrder, orderType)
-        weight = calculeWeight(rowSorted, colorsOrder)
-        weightMatrix.append([weight, rowSorted])
 
-    return weightsBubble(weightMatrix)
+        if weight:
+            weightRow = calculeWeight(rowSorted, colorsOrder)
+            weightMatrix.append([weightRow, rowSorted])
+        else:
+            weightMatrix.append(rowSorted)
+
+    if orderType == OrderType.Itten:
+        transMatrix = transpose(weightMatrix)
+        luminanceMatrix = []
+        for row in transMatrix:
+            rowSorted = rowsBubble(row, colorsOrder, OrderType.Luminance)
+            luminanceMatrix.append(rowSorted)
+        return transpose(luminanceMatrix)
+
+    if weight:
+        return weightsBubble(weightMatrix)
+    else:
+        return weightMatrix
 
 def draw():
     global img, cols, rows, cellsize
@@ -164,7 +204,7 @@ def draw():
     bgColor = bgColor / len(colors)
 
     colorsOrder = randomOrderCriterion(colors)
-    imgMatrix = orderMatrix(imgMatrix, colorsOrder, OrderType.Zigzagging)
+    imgMatrix = orderMatrix(imgMatrix, colorsOrder, OrderType.Itten, False)
 
     for row in imgMatrix:
         for col in row:
