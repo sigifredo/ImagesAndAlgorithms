@@ -1,2 +1,3 @@
+add_subdirectory(floatingPointImageExample)
 add_subdirectory(imageSubsectionExample)
 add_subdirectory(lutFilterExample)
