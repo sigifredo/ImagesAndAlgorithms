@@ -10,11 +10,6 @@
 Application::Application(const std::string& sImagePath)
 {
     _sImagePath = sImagePath;
-}
-
-void Application::setup()
-{
-    ofSetVerticalSync(true);
 
     if (_oImage.load(_sImagePath))
     {
@@ -26,6 +21,25 @@ void Application::setup()
         ofSetupOpenGL(100, 100, OF_WINDOW);
         std::cerr << "Image (" << _sImagePath << ") not loaded" << std::endl;
     }
+}
+
+void Application::setup()
+{
+    ofSetVerticalSync(true);
+
+    ofImage oSecondImage;
+    oSecondImage.allocate(_oImage.getHeight(), _oImage.getWidth(), _oImage.getImageType());
+
+    for (int i = 0; i < _oImage.getWidth(); i++)
+    {
+        for (int j = 0; j < _oImage.getHeight(); j++)
+        {
+            oSecondImage.setColor(j, i, _oImage.getColor(i, j));
+        }
+    }
+
+    _oImage = oSecondImage;
+
     ofSetLineWidth(2);
 }
 
