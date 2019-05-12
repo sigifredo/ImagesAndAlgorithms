@@ -28,8 +28,7 @@ public:
     void applyLUT(ofPixelsRef pix);
 
     bool doLUT;
-    // ofVideoGrabber vidGrabber;
-    ofVideoPlayer vidGrabber;
+    ofVideoGrabber vidGrabber;
     int dirLoadIndex;
     ofDirectory dir;
     ofPoint lutPos;
