@@ -1,1 +1,2 @@
 add_subdirectory(imageSubsectionExample)
+add_subdirectory(lutFilterExample)

@@ -28,6 +28,7 @@ ${OF_LIB_PATH}/utf8/include/
 set(OF_LIBS
 ${OF_LIB_PATH}/openFrameworksCompiled/lib/linux64/libopenFrameworks.a
 /lib/x86_64-linux-gnu/libpthread.so.0
+/lib/x86_64-linux-gnu/libudev.so.1
 /lib/x86_64-linux-gnu/libz.so.1
 /opt/raziel/openFrameworks/libs/kiss/lib/linux64/libkiss.a
 /opt/raziel/openFrameworks/libs/tess2/lib/linux64/libtess2.a
