@@ -14,7 +14,8 @@ Application::Application(const std::string& sImagePath)
     if (_oImage.load(_sImagePath))
     {
         std::cout << "Image (" << _sImagePath << ") loaded" << std::endl;
-        ofSetupOpenGL(_oImage.getWidth(), _oImage.getHeight(), OF_WINDOW);
+        // ofSetupOpenGL(_oImage.getWidth(), _oImage.getHeight(), OF_WINDOW);
+        ofSetupOpenGL(_oImage.getHeight(), _oImage.getWidth(), OF_WINDOW);
     }
     else
     {
