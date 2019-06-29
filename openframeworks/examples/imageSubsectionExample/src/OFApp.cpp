@@ -3,9 +3,17 @@
 // Own
 #include <OFApp.hpp>
 
-OFApp::OFApp(const std::string& sImagePath)
+OFApp::OFApp(const std::string& sImagePath):
+    BaseApplication()
 {
-    _sImagePath = sImagePath;
+    if (sImagePath.front() == '/')
+    {
+        _sImagePath = sImagePath;
+    }
+    else
+    {
+        _sImagePath = currentPath() + sImagePath;
+    }
 }
 
 void OFApp::setup()

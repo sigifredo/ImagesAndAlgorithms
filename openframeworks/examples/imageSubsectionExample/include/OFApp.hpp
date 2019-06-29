@@ -3,9 +3,13 @@
 #ifndef OFAPP_HPP
 #define OFAPP_HPP
 
+// utils
+#include <utils/BaseApplication.hpp>
+
+// OF
 #include <ofMain.h>
 
-class OFApp: public ofBaseApp
+class OFApp: public BaseApplication
 {
 public:
     OFApp(const std::string& sImagePath);
