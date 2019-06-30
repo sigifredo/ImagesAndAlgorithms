@@ -3,6 +3,9 @@
 // Own
 #include <Particle.hpp>
 
+// std
+#include <cmath>
+
 Particle::Particle()
 {
     _fX = 0.0f;
@@ -36,4 +39,9 @@ Particle& Particle::operator=(const Particle& oParticle)
     _oVelocity = oParticle._oVelocity;
 
     return *this;
+}
+
+float Particle::distance(const Particle& oParticle)
+{
+    return std::sqrt((oParticle._fX - _fX) * (oParticle._fX - _fX) + (oParticle._fY - _fY) * (oParticle._fY - _fY));
 }

@@ -9,18 +9,25 @@
 
 class Particle
 {
+public:
     Particle();
     Particle(const float& fX, const float& fY, const float& fRadius, const float& fMass, const Color& oColor, const Velocity& oVelocity);
     Particle(const Particle& oParticle);
 
     Particle& operator=(const Particle& oParticle);
 
+    float distance(const Particle& oParticle);
+
+    /**
+     * Métodos accesores.
+     */
+
     float x() const;
     float y() const;
     float radius() const;
     float mass() const;
-    Color color() const;
-    Velocity velocity() const;
+    Color& color();
+    Velocity& velocity();
 
     void setX(const float& fX);
     void setY(const float& fY);
@@ -38,62 +45,62 @@ private:
     Velocity _oVelocity;
 };
 
-float Particle::x() const
+inline float Particle::x() const
 {
     return _fX;
 }
 
-float Particle::y() const
+inline float Particle::y() const
 {
     return _fY;
 }
 
-float Particle::radius() const
+inline float Particle::radius() const
 {
     return _fRadius;
 }
 
-float Particle::mass() const
+inline float Particle::mass() const
 {
     return _fMass;
 }
 
-Color Particle::color() const
+inline Color& Particle::color()
 {
     return _oColor;
 }
 
-Velocity Particle::velocity() const
+inline Velocity& Particle::velocity()
 {
     return _oVelocity;
 }
 
-void Particle::setX(const float& fX)
+inline void Particle::setX(const float& fX)
 {
     _fX = fX;
 }
 
-void Particle::setY(const float& fY)
+inline void Particle::setY(const float& fY)
 {
     _fY = fY;
 }
 
-void Particle::setRadius(const float& fRadius)
+inline void Particle::setRadius(const float& fRadius)
 {
     _fRadius = fRadius;
 }
 
-void Particle::setMass(const float& fMass)
+inline void Particle::setMass(const float& fMass)
 {
     _fMass = fMass;
 }
 
-void Particle::setColor(const Color& oColor)
+inline void Particle::setColor(const Color& oColor)
 {
     _oColor = oColor;
 }
 
-void Particle::setVelocity(const Velocity& oVelocity)
+inline void Particle::setVelocity(const Velocity& oVelocity)
 {
     _oVelocity = oVelocity;
 }
