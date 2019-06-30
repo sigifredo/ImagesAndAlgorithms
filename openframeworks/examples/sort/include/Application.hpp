@@ -31,6 +31,10 @@ public:
     void update();
     void windowResized(int w, int h);
 
+protected:
+    void bubbleSort();
+    void transpose();
+
 private:
     ofImage _oImage;
     std::string _sImagePath;
