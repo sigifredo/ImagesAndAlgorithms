@@ -12,6 +12,8 @@ src/Particle.cpp
 src/Velocity.cpp
 )
 
-add_executable(gravity src/main.cpp ${SRCS})
+add_executable(gravity.base src/base.cpp ${SRCS})
+add_executable(gravity.of src/main.cpp ${SRCS})
 
-target_link_libraries(gravity ${OF_LIBS} glut)
+target_link_libraries(gravity.base ${OF_LIBS} glut)
+target_link_libraries(gravity.of ${OF_LIBS} utils)
