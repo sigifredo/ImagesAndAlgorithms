@@ -1,4 +1,4 @@
-include_directories(include)
+include_directories(${GLOBAL_INCLUDE_DIR} include)
 
 set (HDRS
 include/Application.hpp
@@ -11,4 +11,4 @@ src/Color.cpp
 )
 
 add_executable(sort src/main.cpp ${SRCS})
-target_link_libraries(sort ${OF_LIBS})
+target_link_libraries(sort utils ${OF_LIBS})

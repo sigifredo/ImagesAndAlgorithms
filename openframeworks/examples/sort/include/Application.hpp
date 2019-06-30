@@ -3,12 +3,15 @@
 #ifndef OFAPP_HPP
 #define OFAPP_HPP
 
+// utils
+#include <utils/BaseApplication.hpp>
+
 // OpenFrameworks
 #include <ofBaseApp.h>
 #include <ofEvents.h>
 #include <ofImage.h>
 
-class Application: public ofBaseApp
+class Application: public BaseApplication
 {
 public:
     Application(const std::string& sImagePath);

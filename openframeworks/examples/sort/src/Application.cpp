@@ -9,7 +9,14 @@
 
 Application::Application(const std::string& sImagePath)
 {
-    _sImagePath = sImagePath;
+    if (sImagePath.front() == '/')
+    {
+        _sImagePath = sImagePath;
+    }
+    else
+    {
+        _sImagePath = currentPath() + sImagePath;
+    }
 
     if (_oImage.load(_sImagePath))
     {
