@@ -8,4 +8,4 @@ include_directories(include)
 set(CMAKE_CXX_STANDARD 14)
 
 set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -g")
-# add_definitions( -Wall -O3 )
+add_definitions( -Wall -O3 )

@@ -56,47 +56,47 @@ void Application::draw()
     }
 }
 
-void Application::keyPressed(int key)
+void Application::keyPressed(int)
 {
 }
 
-void Application::keyReleased(int key)
+void Application::keyReleased(int)
 {
 }
 
-void Application::mouseMoved(int x, int y )
+void Application::mouseMoved(int, int)
 {
 }
 
-void Application::mouseDragged(int x, int y, int button)
+void Application::mouseDragged(int, int, int)
 {
 }
 
-void Application::mousePressed(int x, int y, int button)
+void Application::mousePressed(int, int, int)
 {
 }
 
-void Application::mouseReleased(int x, int y, int button)
+void Application::mouseReleased(int, int, int)
 {
 }
 
-void Application::mouseEntered(int x, int y)
+void Application::mouseEntered(int, int)
 {
 }
 
-void Application::mouseExited(int x, int y)
+void Application::mouseExited(int, int)
 {
 }
 
-void Application::windowResized(int w, int h)
+void Application::windowResized(int, int)
 {
 }
 
-void Application::gotMessage(ofMessage msg)
+void Application::gotMessage(ofMessage)
 {
 }
 
-void Application::dragEvent(ofDragInfo dragInfo)
+void Application::dragEvent(ofDragInfo)
 {
 }
 
