@@ -4,7 +4,7 @@
 #define GLWIDGET_HPP
 
 // Own
-#include <PaintHelper.hpp>
+#include <PaintHelperInterface.hpp>
 
 // Qt
 #include <QOpenGLWidget>
@@ -20,7 +20,7 @@ protected:
     void timerEvent(QTimerEvent* pEvent) override;
 
 private:
-    PaintHelper _oPaintHelper;
+    PaintHelperInterface * _pPaintHelper;
     int _iTimerId;
 };
 

@@ -1,7 +1,7 @@
 
 
 // Own
-#include <PaintHelper.hpp>
+#include <PaintGravityHelper.hpp>
 
 // Qt
 #include <QPainter>
@@ -11,15 +11,16 @@
 // utils
 #include <utils/IOStream.hpp>
 
-#define STOUT_CLASS             "\e[94m[PaintHelper]\e[39m "
-#define STERR_CLASS             "\e[91m[PaintHelper]\e[39m "
+#define STOUT_CLASS             "\e[94m[PaintGravityHelper]\e[39m "
+#define STERR_CLASS             "\e[91m[PaintGravityHelper]\e[39m "
 
 bool sortFunction(const int& i, const int& j)
 {
     return i > j;
 }
 
-PaintHelper::PaintHelper()
+PaintGravityHelper::PaintGravityHelper(QObject * pParent):
+    PaintHelperInterface(pParent)
 {
     QLinearGradient gradient(QPointF(50, -20), QPointF(80, 20));
     gradient.setColorAt(0.0, Qt::white);
@@ -61,7 +62,7 @@ PaintHelper::PaintHelper()
     */
 }
 
-void PaintHelper::paint(QPainter* pPainter, QPaintEvent* pEvent)
+void PaintGravityHelper::paint(QPainter* pPainter, QPaintEvent* pEvent)
 {
     pPainter->save();
     pPainter->setPen(Qt::NoPen);
@@ -76,7 +77,7 @@ void PaintHelper::paint(QPainter* pPainter, QPaintEvent* pEvent)
     pPainter->restore();
 }
 
-void PaintHelper::readParticlesFromImage(const QString& sImagePath, const int& iParticleSize)
+void PaintGravityHelper::readParticlesFromImage(const QString& sImagePath, const int& iParticleSize)
 {
     QImage oImage;
 
@@ -101,7 +102,7 @@ void PaintHelper::readParticlesFromImage(const QString& sImagePath, const int& i
     }
 }
 
-void PaintHelper::gravity(QPainter* pPainter, QPaintEvent* pEvent)
+void PaintGravityHelper::gravity(QPainter* pPainter, QPaintEvent* pEvent)
 {
     pPainter->fillRect(pEvent->rect(), _oBackground);
 

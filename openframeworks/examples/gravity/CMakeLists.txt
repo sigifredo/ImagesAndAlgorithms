@@ -9,13 +9,15 @@ include/Velocity.hpp
 set (MOC_HDRS
 include/GLWidget.hpp
 include/MainWindow.hpp
+include/PaintGravityHelper.hpp
+include/PaintHelperInterface.hpp
 )
 
 set (SRCS
 src/Color.cpp
 src/GLWidget.cpp
 src/MainWindow.cpp
-src/PaintHelper.cpp
+src/PaintGravityHelper.cpp
 src/Particle.cpp
 src/Velocity.cpp
 )
