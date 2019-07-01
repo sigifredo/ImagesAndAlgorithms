@@ -3,6 +3,7 @@
 // Own
 #include <GLWidget.hpp>
 #include <PaintGravityHelper.hpp>
+#include <PaintImageHelper.hpp>
 
 // Qt
 #include <QPainter>
@@ -13,10 +14,16 @@
 GLWidget::GLWidget(QWidget * pParent):
     QOpenGLWidget(pParent)
 {
-    PaintGravityHelper * pPaintGravityHelper = new PaintGravityHelper();
+    /*
+    PaintGravityHelper * pPaintGravityHelper = new PaintGravityHelper(this);
 
     pPaintGravityHelper->readParticlesFromImage("image.jpg", 40);
     _pPaintHelper = pPaintGravityHelper;
+    */
+    PaintImageHelper * pPaintImageHelper = new PaintImageHelper(this);
+
+    pPaintImageHelper->readImage("image.jpg");
+    _pPaintHelper = pPaintImageHelper;
 
     _iTimerId = startTimer(UPDATE_TIME);
 }

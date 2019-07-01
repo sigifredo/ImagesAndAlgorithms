@@ -35,15 +35,6 @@ public:
      * @param iParticleSize Tamaño de cada partícula.
      *
      */
-    void readImage(const QString& sImagePath, const int& iParticleSize = 5);
-
-    /**
-     * Método encargado de leer la lista de partículas desde una imagen,
-     *
-     * @param sImagePath Ruta de la imagen de la cual se tomarán las partículas.
-     * @param iParticleSize Tamaño de cada partícula.
-     *
-     */
     void readParticlesFromImage(const QString& sImagePath, const int& iParticleSize = 5);
 
 protected:

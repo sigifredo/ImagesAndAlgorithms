@@ -11,6 +11,7 @@ include/GLWidget.hpp
 include/MainWindow.hpp
 include/PaintGravityHelper.hpp
 include/PaintHelperInterface.hpp
+include/PaintImageHelper.hpp
 )
 
 set (SRCS
@@ -18,6 +19,7 @@ src/Color.cpp
 src/GLWidget.cpp
 src/MainWindow.cpp
 src/PaintGravityHelper.cpp
+src/PaintImageHelper.cpp
 src/Particle.cpp
 src/Velocity.cpp
 )
