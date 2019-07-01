@@ -4,14 +4,16 @@
 #define PARTICLE_HPP
 
 // Own
-#include <Color.hpp>
 #include <Velocity.hpp>
+
+// Qt
+#include <QColor>
 
 class Particle
 {
 public:
     Particle();
-    Particle(const float& fX, const float& fY, const float& fRadius, const float& fMass, const Color& oColor, const Velocity& oVelocity);
+    Particle(const float& fX, const float& fY, const float& fRadius, const float& fMass, const QColor& oColor, const Velocity& oVelocity);
     Particle(const Particle& oParticle);
 
     Particle& operator=(const Particle& oParticle);
@@ -26,14 +28,14 @@ public:
     float y() const;
     float radius() const;
     float mass() const;
-    Color& color();
+    QColor& color();
     Velocity& velocity();
 
     void setX(const float& fX);
     void setY(const float& fY);
     void setRadius(const float& fRadius);
     void setMass(const float& fMass);
-    void setColor(const Color& oColor);
+    void setColor(const QColor& oColor);
     void setVelocity(const Velocity& oVelocity);
 
 private:
@@ -41,7 +43,7 @@ private:
     float _fY;
     float _fRadius;
     float _fMass;
-    Color _oColor;
+    QColor _oColor;
     Velocity _oVelocity;
 };
 
@@ -65,7 +67,7 @@ inline float Particle::mass() const
     return _fMass;
 }
 
-inline Color& Particle::color()
+inline QColor& Particle::color()
 {
     return _oColor;
 }
@@ -95,7 +97,7 @@ inline void Particle::setMass(const float& fMass)
     _fMass = fMass;
 }
 
-inline void Particle::setColor(const Color& oColor)
+inline void Particle::setColor(const QColor& oColor)
 {
     _oColor = oColor;
 }

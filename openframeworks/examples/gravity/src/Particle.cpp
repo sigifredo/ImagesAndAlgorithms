@@ -14,7 +14,7 @@ Particle::Particle()
     _fMass = 0.0f;
 }
 
-Particle::Particle(const float& fX, const float& fY, const float& fRadius, const float& fMass, const Color& oColor, const Velocity& oVelocity)
+Particle::Particle(const float& fX, const float& fY, const float& fRadius, const float& fMass, const QColor& oColor, const Velocity& oVelocity)
 {
     _fX = fX;
     _fY = fY;

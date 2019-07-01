@@ -1,19 +1,17 @@
 
 
-// Own
-#include <Application.hpp>
+// Qt
+#include <QApplication>
 
-// OpenFrameworks
-#include <ofAppRunner.h>
+// Own
+#include <MainWindow.hpp>
 
 int main(int argc, char **argv)
 {
-    if (argc == 2)
-    {
-        ofRunApp(new Application(argv[1]));
-    }
-    else
-    {
-        std::printf("use:\n\t%s <image path>\n", argv[0]);
-    }
+    QApplication app(argc, argv);
+
+    MainWindow mw;
+    mw.showMaximized();
+
+    return app.exec();
 }
