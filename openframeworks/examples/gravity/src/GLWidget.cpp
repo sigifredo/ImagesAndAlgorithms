@@ -5,13 +5,15 @@
 
 // Qt
 #include <QPainter>
+#include <QTimerEvent>
+
+#define UPDATE_TIME                 100
 
 GLWidget::GLWidget(QWidget * pParent):
     QOpenGLWidget(pParent)
 {
-    _iElapsed = 0;
-
-    startTimer(50);
+    _oPaintHelper.readParticlesFromImage("image.jpg", 40);
+    _iTimerId = startTimer(UPDATE_TIME);
 }
 
 void GLWidget::paintEvent(QPaintEvent* pEvent)
@@ -19,12 +21,17 @@ void GLWidget::paintEvent(QPaintEvent* pEvent)
     QPainter painter;
     painter.begin(this);
     painter.setRenderHint(QPainter::Antialiasing);
-    _oPaintHelper.paint(&painter, pEvent, _iElapsed);
+    _oPaintHelper.paint(&painter, pEvent);
     painter.end();
 }
 
 void GLWidget::timerEvent(QTimerEvent* pEvent)
 {
-    _iElapsed = (_iElapsed + 50) % 1000;
-    update();
+    if (_iTimerId == pEvent->timerId())
+    {
+        killTimer(pEvent->timerId());
+
+        update();
+        _iTimerId = startTimer(UPDATE_TIME);
+    }
 }

@@ -20,8 +20,8 @@ protected:
     void timerEvent(QTimerEvent* pEvent) override;
 
 private:
-    int _iElapsed;
     PaintHelper _oPaintHelper;
+    int _iTimerId;
 };
 
 #endif
