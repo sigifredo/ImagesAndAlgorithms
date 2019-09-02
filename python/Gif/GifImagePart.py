@@ -1,9 +1,57 @@
 
 
+from .GifUtils import readColorTable
+
 class GifImagePart:
 
+    class ImageOptions:
+        def __init__(self):
+            self.useLocalColorTable = False
+            self.interlanced = False
+            self.tableSorted = False
+            self.reserved = 0
+            self.localColorTableSize = 0
+
+        def read(self, flags):
+            self.localColorTableSize = flags & 7
+            self.reserved = (flags >> 3) & 3
+            self.tableSorted = ((flags >> 5) & 1) == 1
+            self.interlanced = ((flags >> 6) & 1) == 1
+            self.useLocalColorTable = ((flags >> 7) & 1) == 1
+
+    class ImageData:
+        def __init__(self):
+            self.left = 0
+            self.top = 0
+            self.width = 0
+            self.height = 0
+            self.options = GifImagePart.ImageOptions()
+            self.localColorTable = []
+            self.minCodeSize = 0
+            self.colorTable = []
+            self.data = []
+
+        def read(self, file):
+            left = file.read(2)
+            top = file.read(2)
+            width = file.read(2)
+            height = file.read(2)
+            flags = file.read(1)
+
+            self.left = int.from_bytes(left, byteorder='little')
+            self.top = int.from_bytes(top, byteorder='little')
+            self.width = int.from_bytes(width, byteorder='little')
+            self.height = int.from_bytes(height, byteorder='little')
+            flags = int.from_bytes(flags, byteorder='little')
+            self.options.read(flags)
+
+            if self.options.useLocalColorTable:
+                self.colorTable = readColorTable(file, self.options.localColorTableSize)
+            else:
+                print("La imagen no tiene tabla de colores local")
+
     def __init__(self):
-        pass
+        self.imageData = []
 
     def read(self, file):
         while True:
@@ -19,7 +67,9 @@ class GifImagePart:
 
     def _readLWZ(self, file):
         print("Img type LWZ")
-        pass
+        imageData = GifImagePart.ImageData()
+        imageData.read(file)
+        self.imageData.append(imageData)
 
     def _readMeta(self, file):
         print("Img type meta")
