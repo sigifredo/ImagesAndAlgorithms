@@ -2,6 +2,7 @@
 
 import os
 from .GifHeader import GifHeader
+from .GifImagePart import GifImagePart
 
 def lsb2msb(lsbNum):
     msbNum = bytearray(lsbNum)
@@ -16,21 +17,16 @@ class GifReader:
     def __init__(self, filePath):
         self.filePath = filePath
         self.header = GifHeader()
+        self.imagePart = GifImagePart()
 
         if os.path.isfile(filePath):
             try:
                 self._file = open(filePath, "rb")
                 self.header.read(self._file)
-                self._readImage()
+                self.imagePart.read(self._file)
 
                 self._file.close()
             except IOError as ex:
                 print("Ha ocurrido un error abriendo el archivo: \"" + filePath + "\": " + ex.errno)
         else:
             print("El archivo \"" + filePath + "\" no existe")
-
-    def _readImage(self):
-        for i in range(10):
-            lwz = self._file.read(1)
-            lwz = int.from_bytes(lwz, byteorder='little')
-            print(hex(lwz))
