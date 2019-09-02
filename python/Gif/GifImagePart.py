@@ -6,13 +6,16 @@ class GifImagePart:
         pass
 
     def read(self, file):
-        imgType = file.read(1)
-        # imgType = int.from_bytes(imgType, byteorder='little')
+        while True:
+            imgType = file.read(1)
 
-        if imgType[0] == 0x2c:
-            self._readLWZ(file)
-        elif imgType[0] == 0x21:
-            self._readMeta(file)
+            if imgType[0] == 0x3b:
+                break
+            else:
+                if imgType[0] == 0x2c:
+                    self._readLWZ(file)
+                elif imgType[0] == 0x21:
+                    self._readMeta(file)
 
     def _readLWZ(self, file):
         print("Img type LWZ")
@@ -26,11 +29,28 @@ class GifImagePart:
 
         if subType[0] == 0x01: # Plain text
             print(file.read(12))
+
+            while True:
+                block = file.read(1)
+
+                if (block[0] == 0x0):
+                    break
+
         elif subType[0] == 0xf9: # Graphics control
-            print(file.read(4))
+            print(file.read(5))
         elif subType[0] == 0xfe: # Comment
-            pass
+            while True:
+                block = file.read(1)
+
+                if (block[0] == 0x0):
+                    break
         elif subType[0] == 0xff: # Application
             print(file.read(11))
-            pass
+
+            while True:
+                block = file.read(1)
+                print(block)
+
+                if (block[0] == 0x0):
+                    break
         # subType = int.from_bytes(subType, byteorder='little')
