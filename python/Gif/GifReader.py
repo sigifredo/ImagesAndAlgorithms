@@ -4,13 +4,6 @@ import os
 from .GifHeader import GifHeader
 from .GifImagePart import GifImagePart
 
-def lsb2msb(lsbNum):
-    msbNum = bytearray(lsbNum)
-    msbNum.reverse()
-    msbNum = bytes(msbNum)
-
-    return msbNum
-
 class GifReader:
     _file = None
 
