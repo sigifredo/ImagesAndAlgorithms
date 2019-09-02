@@ -1,5 +1,7 @@
 
 
+from .GifUtils import *
+
 class GifHeader:
 
     class Options:
@@ -36,47 +38,25 @@ class GifHeader:
         version = version.decode("utf-8")
 
         if version.lower() == "gif89a" or version.lower() == "gif87a":
-            width = file.read(2)
-            height = file.read(2)
-            flags = file.read(1)
-            bgColor = file.read(1)
-            aspectRatio = file.read(1)
-
-            width = int.from_bytes(width, byteorder='little')
-            height = int.from_bytes(height, byteorder='little')
-            flags = int.from_bytes(flags, byteorder='little')
-            bgColor = int.from_bytes(bgColor, byteorder='little')
-            aspectRatio = int.from_bytes(aspectRatio, byteorder='little')
+            self.width = readInt(file, 2)
+            self.height = readInt(file, 2)
+            flags = readInt(file, 1)
+            self.bgColor = readInt(file, 1)
+            self.aspectRatio = (readInt(file, 1) + 15) / 64
 
             print("Versión: " + version)
             print("flags: " + str(bin(flags)))
-            print("dimensiones: " + str(width) + "x" + str(height))
+            print("dimensiones: " + str(self.width) + "x" + str(self.height))
 
             self.version = version
-            self.height = height
-            self.width = width
-            self.bgColor = bgColor
-            self.aspectRatio = (aspectRatio + 15) / 64
             self.options.read(flags)
-            self._readGlobalColorTable(file)
+
+            if (self.options.useGlobalColorTable):
+                self.colorTable = readColorTable(file, self.options.globalColorTableSize)
+            else:
+                print("La imagen no tiene tabla de colores global")
 
             return True
         else:
             print("la cabecera no coincide con el formato GIF")
             return False
-
-    def _readGlobalColorTable(self, file):
-        print("globalColorTableSize: " + str(self.options.globalColorTableSize))
-        if self.options.useGlobalColorTable: # or self.version.lower() == "gif87a":
-            size = 1 << (self.options.globalColorTableSize + 1)
-
-            for i in range(size):
-                color = file.read(3)
-                # print(str(i) + ": " + str(color))
-                color = int.from_bytes(color, byteorder='little')
-                print(str(i) + ": " + hex(color))
-                self.colorTable.append(color)
-
-            print("colorTable: " + str(size) + " -> " + str(len(self.colorTable)))
-        else:
-            print("El gif no tiene tabla de colores global")
