@@ -6,6 +6,8 @@ from Gif.GifReader import GifReader
 
 if __name__ == "__main__":
 
+    print(sys.byteorder)    # 'little' o 'big'
+
     if len(sys.argv) > 1:
         gifObj = GifReader(sys.argv[1])
     else:
