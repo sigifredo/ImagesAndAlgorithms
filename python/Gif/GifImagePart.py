@@ -1,6 +1,6 @@
 
 
-from .GifUtils import readColorTable
+from .GifUtils import *
 
 class GifImagePart:
 
@@ -32,23 +32,21 @@ class GifImagePart:
             self.data = []
 
         def read(self, file):
-            left = file.read(2)
-            top = file.read(2)
-            width = file.read(2)
-            height = file.read(2)
-            flags = file.read(1)
+            self.left = readInt(file, 2)
+            self.top = readInt(file, 2)
+            self.width = readInt(file, 2)
+            self.height = readInt(file, 2)
+            flags = readInt(file, 1)
 
-            self.left = int.from_bytes(left, byteorder='little')
-            self.top = int.from_bytes(top, byteorder='little')
-            self.width = int.from_bytes(width, byteorder='little')
-            self.height = int.from_bytes(height, byteorder='little')
-            flags = int.from_bytes(flags, byteorder='little')
             self.options.read(flags)
 
             if self.options.useLocalColorTable:
                 self.colorTable = readColorTable(file, self.options.localColorTableSize)
             else:
                 print("La imagen no tiene tabla de colores local")
+
+            self.minCodeSize = readInt(file, 1)
+            print(self.minCodeSize)
 
     def __init__(self):
         self.imageData = []
@@ -103,4 +101,3 @@ class GifImagePart:
 
                 if (block[0] == 0x0):
                     break
-        # subType = int.from_bytes(subType, byteorder='little')
