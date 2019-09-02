@@ -2,14 +2,11 @@
 
 import os
 import sys
+import gif
 
-if len(sys.argv) > 1:
-    filePath = sys.argv[1]
+if __name__ == "__main__":
 
-    if os.path.isfile(sys.argv[1]):
-        fd = open(filePath, "r")
-        fd.close()
+    if len(sys.argv) > 1:
+        gifObj = gif.Gif(sys.argv[1])
     else:
-        print("El archivo \"" + filePath + "\" no existe")
-else:
-    print("No se ha especificado la ruta del archivo \"gif\"")
+        print("No se ha especificado la ruta del archivo \"gif\"")
